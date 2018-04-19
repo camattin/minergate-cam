@@ -13,6 +13,9 @@ RUN apt-get install -y wget libxcb1 libpcre16-3
 # Get minergate-cli
 RUN wget -o /dev/null -O minergate.deb https://minergate.com/download/ubuntu && dpkg -i minergate.deb
 
+# Debug
+RUN /bin/ls -l /opt/minergate-cli/
+
 # Run it
 ENTRYPOINT ["minergate-cli"]
 CMD ["--user","camattin@gmail.com","--xmr"]
