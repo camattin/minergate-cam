@@ -8,6 +8,8 @@ RUN apt-get update \
     && apt-get -qq --no-install-recommends install \
         ca-certificates \
         wget \
+        libxcb1 \
+        libpcre16-3 \
     && rm -r /var/lib/apt/lists/*
 
 RUN wget -q --content-disposition https://minergate.com/download/deb-cli \
