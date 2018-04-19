@@ -1,21 +1,18 @@
 # Set the base image
-FROM ubuntu:latest
+FROM ubuntu:16.04
 
 # Dockerfile author/maintainer
 MAINTAINER Chris Mattingly <camattin@gmail.com>
 
-# Update application repository list
-RUN apt-get update
+RUN apt-get update \
+    && apt-get -qq --no-install-recommends install \
+        ca-certificates \
+        wget \
+    && rm -r /var/lib/apt/lists/*
 
-# Install wget and minergate-cli deps
-RUN apt-get install -y wget libxcb1 libpcre16-3
+RUN wget -q --content-disposition https://minergate.com/download/deb-cli \
+    && dpkg -i *.deb \
+    && rm *.deb
 
-# Get minergate-cli
-RUN wget -o /dev/null -O minergate.deb https://minergate.com/download/ubuntu && dpkg -i minergate.deb
-
-# Debug
-RUN dpkg -L minergate-cli
-
-# Run it
 ENTRYPOINT ["minergate-cli"]
-CMD ["--user","camattin@gmail.com","--xmr"]
+CMD ["--user", "camattin@gmail.com", "--xmr"]
