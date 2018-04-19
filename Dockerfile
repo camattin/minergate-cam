@@ -1,5 +1,5 @@
 # Set the base image
-FROM ubuntu:16.04
+FROM ubuntu:latest
 
 # Dockerfile author/maintainer
 MAINTAINER Chris Mattingly <camattin@gmail.com>
